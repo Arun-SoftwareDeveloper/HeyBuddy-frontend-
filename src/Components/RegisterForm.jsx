@@ -29,12 +29,12 @@ function RegisterForm() {
 
     if (
       formData.name.trim() === "" ||
-      formData.phoneNumber.trim() === "" ||
+      (formData.phoneNumber.trim() === "" && formData.email.trim() === "") ||
       formData.month.trim() === "" ||
       formData.day.trim() === "" ||
       formData.year.trim() === ""
     ) {
-      toast.error("Please fill out all fields.");
+      toast.error("Please fill out all required fields.");
       return;
     }
 
@@ -100,6 +100,7 @@ function RegisterForm() {
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
+                    disabled={formData.email.trim() !== ""}
                   />
                   <br />
                 </div>
@@ -119,6 +120,7 @@ function RegisterForm() {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
+                        disabled={formData.phoneNumber.trim() !== ""}
                       />
                       <br />
                     </>
