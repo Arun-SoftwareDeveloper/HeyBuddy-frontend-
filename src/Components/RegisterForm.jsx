@@ -100,7 +100,6 @@ function RegisterForm() {
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
-                    required
                   />
                   <br />
                 </div>
