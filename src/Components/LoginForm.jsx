@@ -8,38 +8,50 @@ import "react-toastify/dist/ReactToastify.css";
 function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
 
     // Basic validation
+    if (!username) {
+      setUsernameError("Please enter your email.");
+    } else {
+      setUsernameError("");
+    }
+
+    if (!password) {
+      setPasswordError("Please enter your password.");
+    } else {
+      setPasswordError("");
+    }
+
     if (!username || !password) {
-      return toast.error("Please enter both username and password.");
+      return;
     }
 
     // Password validation
     const passwordRegex =
       /^(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
     if (!passwordRegex.test(password)) {
-      return toast.error(
+      setPasswordError(
         "Password must contain at least one uppercase letter and one symbol."
       );
+      return;
     }
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(username)) {
-      return toast.error("Invalid email address.");
+      setUsernameError("Invalid email address.");
+      return;
     }
 
     // Simulating login logic
-    if (username && password) {
-      console.log("Login successful!");
-      toast.success("Login successful!");
-      // Redirect or perform further actions after successful login
-    } else {
-      toast.error("Invalid username or password.");
-    }
+    console.log("Login successful!");
+    toast.success("Login successful!");
+    // Redirect or perform further actions after successful login
   };
 
   return (
@@ -65,6 +77,7 @@ function LoginForm() {
                     onChange={(e) => setUsername(e.target.value)}
                     required
                   />
+                  <small className="text-danger">{usernameError}</small>
                   <br />
                 </div>
                 <div className="form-group">
@@ -76,6 +89,7 @@ function LoginForm() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
+                  <small className="text-danger">{passwordError}</small>
                   <br />
                 </div>
                 <div className="form-group text-center">
