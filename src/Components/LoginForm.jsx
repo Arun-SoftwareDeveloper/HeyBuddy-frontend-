@@ -103,7 +103,7 @@ function LoginForm() {
                     {" "}
                     <p className="text-left">Forgot Password?</p>
                   </Link>
-                  <Link to="/" className="others">
+                  <Link to="/register" className="others">
                     {" "}
                     <p className="text-right">Sign up</p>
                   </Link>
